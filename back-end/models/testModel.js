@@ -1,46 +1,52 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
-const testSchema = new schema({
-    _id: {
-        type: String,
-        default: () => nanoid(),
-        required: true
-    },
-    name: {
-        type: String,
-        required: true
-    },
-    category: {
-        type: String,
-        required: true
-    },
-    duration: {
-        type: Number,
-        required: true
-    },
-    nbQuestion: {
-        type: Number,
-        required: true
-    },
 
-    rating: {
-        type: Number,
-        required: false
-    },
-    disponibility: {
-        type: Boolean,
-        required: true
-    },
+const reqString = {
+    type: String,
+    required: true
+};
+const reqBoolean = {
+    type: Boolean,
+    required: true
+};
 
-    subdomain: [{
-        type: String,
-        required: true
+const reqNumber = {
+    type: Number,
+    required: true
+};
+const SessionSchema = new schema({
+    _id: reqString,
+    code: reqString,
+    startAt: Date,
+    endtAt: Date,
+    learners :[{
+        email : reqString
+    }]
+})
+
+const QuestionSchema = new schema({
+    question: reqString,
+    answers: [{
+        answer: reqString,
+        validity: reqBoolean
     }],
-    access: {
-        type: String,
-        required: true
-    },
+    justification: reqString
+}, { timestamps: true })
 
+const testSchema = new schema({
+    _id: reqString,
+    name: reqString,
+    category: reqString,
+    duration: reqNumber,
+    nbQuestion: reqNumber,
+
+    rating: reqNumber,
+    disponibility: reqBoolean,
+
+    subdomain: [reqString],
+    access: reqString,
+    questions: [QuestionSchema],
+    sessions :[SessionSchema]
 }, { timestamps: true })
 
 module.exports = mongoose.model('test', testSchema);
