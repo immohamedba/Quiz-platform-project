@@ -12,12 +12,12 @@ const router = express.Router();
 router.get('/', getTestTakens)
 
 //Get a single testTaken
-router.get('/:id', getTestTaken)
+router.get('/testTaken', getTestTaken)
 
 //Post a new testTaken
 router.post('/', createTestTaken);
 
 //delete a test
-router.delete('/:id', deleteTestTaken)
+router.delete('/testTaken', deleteTestTaken)
 
 module.exports = router;
