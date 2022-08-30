@@ -39,8 +39,8 @@ const deleteLearner = async (req, res) => {
 const updateLearner = async (req, res) => {
     const { id } = req.params;
     const learner = await Learner.findByIdAndUpdate(
-        {_id: id },
-        {...req.body }
+        { _id: id },
+        { ...req.body }
     )
     if (!learner) {
         return res.status(404).json({ error: 'No such learner' })
@@ -48,10 +48,20 @@ const updateLearner = async (req, res) => {
     res.status(200).json(learner)
 }
 
+// Authentification 
+const loginLearner = async (req, res) => {
+    res.json({ mssg: ' login Learner' })
+}
+const singupLearner = async (req, res) => {
+    res.json({ mssg: ' Singup Learner' })
+}
+
 module.exports = {
     getLearners,
     createLearner,
     getLearner,
     deleteLearner,
-    updateLearner
+    updateLearner,
+    loginLearner,
+    singupLearner
 }
