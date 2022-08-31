@@ -1,7 +1,48 @@
 const Learner = require('../models/LearnerModel');
+const jwt = require('jsonwebtoken')
+
+const createToken = (_id) => {
+    return jwt.sign({ _id }, process.env.SECRET, { expiresIn: '3d' })
+}
+
+// Authentification 
+
+// signup learner
+const singupLearner = async (req, res) => {
+
+    const { _id, firstName, lastName, password } = req.body;
+    try {
+        const learner = await Learner.signup(_id, firstName, lastName, password);
+        // create a Taken
+        const token = createToken(learner._id);
+
+        res.status(200).json({ _id, token })
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+}
+// login learner
+const loginLearner = async (req, res) => {
+    const {email, password } = req.body;
+    //console.log( email, password )
+    try {
+        const learner = await Learner.login(email, password);
+        // create a Taken
+        const token = createToken(learner._id);
+
+        res.status(200).json({ _id, token })
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+}
+
+
+
 
 // get all learners
 const getLearners = async (req, res) => {
+    // Learner.sign();
+
     const learner = await Learner.find({}).sort({ createdAt: -1 })
     res.status(200).json(learner);
 }
@@ -48,14 +89,6 @@ const updateLearner = async (req, res) => {
     res.status(200).json(learner)
 }
 
-// Authentification 
-const loginLearner = async (req, res) => {
-    res.json({ mssg: ' login Learner' })
-}
-const singupLearner = async (req, res) => {
-    res.json({ mssg: ' Singup Learner' })
-}
-
 module.exports = {
     getLearners,
     createLearner,
@@ -64,4 +97,4 @@ module.exports = {
     updateLearner,
     loginLearner,
     singupLearner
-}
+} 
