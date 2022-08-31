@@ -23,10 +23,10 @@ const singupLearner = async (req, res) => {
 }
 // login learner
 const loginLearner = async (req, res) => {
-    const {email, password } = req.body;
-    //console.log( email, password )
+    const {_id, password } = req.body;
+    console.log( "in loginLearner ", _id, password )
     try {
-        const learner = await Learner.login(email, password);
+        const learner = await Learner.login(_id, password);
         // create a Taken
         const token = createToken(learner._id);
 

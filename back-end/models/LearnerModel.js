@@ -54,20 +54,21 @@ learnerSchema.statics.signup = async function (_id, firstName, lastName, passwor
 }
 
 //
-learnerSchema.statics.login = async function (email, password) {
-    if (!email || !password) {
+learnerSchema.statics.login = async function (_id, password) {
+    //console.log("in statics.login, email: ", _id, "password: ", password )
+    if (!_id || !password) {
         throw Error('All fields must be filled')
     }
-    if (!validator.isEmail(email)) {
+    if (!validator.isEmail(_id)) {
         throw Error('email is not valid')
     }
-    const learner = await this.findOne({ email });
+    const learner = await this.findById(_id);
 
     if (!learner) {
         throw Error(' incorrect  email');
     }
     const match = await bcrypy.compare(password, learner.password);
-    console.log(password, learner.password, match )
+    //console.log(password, learner.password, match )
     if ( !match) {
         throw Error('incorrect password')
     }
