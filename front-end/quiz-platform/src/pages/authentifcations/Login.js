@@ -5,12 +5,13 @@ import { useSLogin } from '../../hooks/useLogin';
 const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const {Login,isLoading, error} = useSLogin();
+    const { Login, isLoading, error } = useSLogin();
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         const _id = email;
-        await Login(_id, password)
+        //  console.log(_id,password );
+        await Login(_id, password);
     }
 
     return (

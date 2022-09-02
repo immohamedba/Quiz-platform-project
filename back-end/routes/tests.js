@@ -5,9 +5,14 @@ const {
     getTest,
     deleteTest,
     updateTest
-}= require('../controllers/testController')
+} = require('../controllers/testController')
+
+const requireAutth = require('../middleware/requireAuth')
+
 const router = express.Router();
 
+//require auth for all testes 
+router.use(requireAutth)
 //Get all test
 router.get('/', getTests)
 
@@ -15,12 +20,12 @@ router.get('/', getTests)
 router.get('/:id', getTest)
 
 //Post a new test
-router.post('/',createTest);
+router.post('/', createTest);
 
 //delete a test
 router.delete('/:id', deleteTest)
 
 // update a test
-router.patch('/:id',updateTest)
+router.patch('/:id', updateTest)
 
 module.exports = router;

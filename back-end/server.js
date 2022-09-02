@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express')
 const mongoose = require("mongoose");
 const testRoutes = require('./routes/tests');
-const learnerRoutes = require('./routes/learners');
+const userRoutes = require('./routes/user');
 const trainerRoutes = require('./routes/trainers');
 const testTakenRoutes = require('./routes/testTaken');
 
@@ -19,7 +19,7 @@ app.use(express.json());
 
 //Routes
 app.use('/api/tests', testRoutes)
-app.use('/api/learners', learnerRoutes)
+app.use('/api/users', userRoutes)
 app.use('/api/trainers', trainerRoutes)
 app.use('/api/testTaken', testTakenRoutes)
 
