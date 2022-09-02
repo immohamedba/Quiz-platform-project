@@ -7,13 +7,15 @@ const Signup = () => {
     const [password, setPassword] = useState('')
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('');
+    const [role, setRole] = useState('learner');
+    const [phone, setPhone] = useState('');
     const { Signup, error, isLoading } = useSignup();
 
-
+    // à revoir 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await Signup(email, password, firstName, lastName)
-
+        console.log(email, password, firstName, lastName, role, phone);
+        await Signup(email, password, firstName, lastName, role, phone)
     }
     return (
 
@@ -25,12 +27,12 @@ const Signup = () => {
                 value={email}
             />
             <label>First Name :</label>
-            <input type="firstname"
+            <input type="text"
                 onChange={(e) => setFirstName(e.target.value)}
                 value={firstName}
             />
             <label>Last Name :</label>
-            <input type="lastname"
+            <input type="text"
                 onChange={(e) => setLastName(e.target.value)}
                 value={lastName}
             />
@@ -39,7 +41,21 @@ const Signup = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
             />
-            <button disabled ={isLoading}>Sign up</button>
+
+            <label htmlFor="role">Choose a Role:</label>
+
+            <select id="role" onChange={(e) => setRole(e.target.value)}>
+                <option defaultValue="learner">Learner</option>
+                <option value="trainer">Trainer</option>
+            </select>
+            {role === 'trainer' && (<div>
+                <label> Phone: </label>
+                <input type="number"
+                    onChange={(e) => setPhone(e.target.value)}
+                    value={phone}
+                />
+            </div>)}
+            <button disabled={isLoading}>Sign up</button>
             {error && <div> {error}</div>}
         </form>
     )
