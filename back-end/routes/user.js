@@ -8,8 +8,14 @@ const {
     loginUser,
     singupUser
 } = require('../controllers/userController');
+const requireAutth = require('../middleware/requireAuth')
 const router = express.Router();
 
+router.post('/login', loginUser);
+router.post('/signup', singupUser);
+
+// authantication required
+router.use(requireAutth)
 //Get all user
 router.get('/', getUsers)
 
