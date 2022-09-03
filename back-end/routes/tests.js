@@ -7,8 +7,6 @@ const {
     updateTest
 } = require('../controllers/testController')
 
-const requireAutth = require('../middleware/requireAuth')
-
 const router = express.Router();
 
 //require auth for all testes 

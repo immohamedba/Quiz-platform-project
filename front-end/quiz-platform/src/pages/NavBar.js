@@ -4,7 +4,7 @@ import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from './../hooks/useAuthContext';
 const NavBar = () => {
     const { logout } = useLogout();
-    const { learner } = useAuthContext();
+    const { user } = useAuthContext();
     const handelClick = () => {
         logout();
     }
@@ -13,13 +13,13 @@ const NavBar = () => {
             <h2> NavBar</h2>
             <nav>
                 <div>
-                    {!learner && (<div>
+                    {!user && (<div>
                         <Link to="/login" style={{margin:"20px"}}>Login</Link >
                         <Link to="/signup">Signup</Link>
                     </div>
                     )}
-                    {learner && (<div>
-                        <span>{learner._id}</span>
+                    {user && (<div>
+                        <span>{user._id}</span>
                         <button onClick={handelClick} > Log out</button>
                     </div>)}
                 </div>
@@ -27,7 +27,7 @@ const NavBar = () => {
 
         </div>
     )
-}
+} 
 
 
 export default NavBar;

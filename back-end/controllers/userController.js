@@ -36,8 +36,6 @@ const loginUser = async (req, res) => {
 }
 
 
-
-
 // get all users
 const getUsers = async (req, res) => {
     // user.sign();

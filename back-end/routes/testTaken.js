@@ -5,8 +5,11 @@ const {
     createTestTaken,
     deleteTestTaken
 } = require('../controllers/testTakenController')
+const requireAutth = require('../middleware/requireAuth')
 const router = express.Router();
 
+// authantication required
+router.use(requireAutth)
 
 //Get all testTaken
 router.get('/', getTestTakens)
